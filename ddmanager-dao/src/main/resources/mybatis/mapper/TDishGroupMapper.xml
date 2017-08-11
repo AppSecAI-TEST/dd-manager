@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dd.manager.dao.TDishGroupMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.dd.manager.bean.TDishGroup">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="group_intro" jdbcType="VARCHAR" property="groupIntro" />
+    <result column="group_price" jdbcType="DECIMAL" property="groupPrice" />
+    <result column="group_picture" jdbcType="VARCHAR" property="groupPicture" />
+    <result column="group_evaluate" jdbcType="VARCHAR" property="groupEvaluate" />
+    <result column="person_tatal" jdbcType="INTEGER" property="personTatal" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    group_id, shop_id, group_intro, group_price, group_picture, group_evaluate, person_tatal
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.dd.manager.bean.TDishGroupExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_dish_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_dish_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_dish_group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.dd.manager.bean.TDishGroupExample">
+    delete from t_dish_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.dd.manager.bean.TDishGroup">
+    insert into t_dish_group (group_id, shop_id, group_intro, 
+      group_price, group_picture, group_evaluate, 
+      person_tatal)
+    values (#{groupId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{groupIntro,jdbcType=VARCHAR}, 
+      #{groupPrice,jdbcType=DECIMAL}, #{groupPicture,jdbcType=VARCHAR}, #{groupEvaluate,jdbcType=VARCHAR}, 
+      #{personTatal,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.atguigu.dd.manager.bean.TDishGroup">
+    insert into t_dish_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="groupIntro != null">
+        group_intro,
+      </if>
+      <if test="groupPrice != null">
+        group_price,
+      </if>
+      <if test="groupPicture != null">
+        group_picture,
+      </if>
+      <if test="groupEvaluate != null">
+        group_evaluate,
+      </if>
+      <if test="personTatal != null">
+        person_tatal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="groupIntro != null">
+        #{groupIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPrice != null">
+        #{groupPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="groupPicture != null">
+        #{groupPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEvaluate != null">
+        #{groupEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="personTatal != null">
+        #{personTatal,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.atguigu.dd.manager.bean.TDishGroupExample" resultType="java.lang.Long">
+    select count(*) from t_dish_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_dish_group
+    <set>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupIntro != null">
+        group_intro = #{record.groupIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupPrice != null">
+        group_price = #{record.groupPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.groupPicture != null">
+        group_picture = #{record.groupPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupEvaluate != null">
+        group_evaluate = #{record.groupEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.personTatal != null">
+        person_tatal = #{record.personTatal,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_dish_group
+    set group_id = #{record.groupId,jdbcType=INTEGER},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      group_intro = #{record.groupIntro,jdbcType=VARCHAR},
+      group_price = #{record.groupPrice,jdbcType=DECIMAL},
+      group_picture = #{record.groupPicture,jdbcType=VARCHAR},
+      group_evaluate = #{record.groupEvaluate,jdbcType=VARCHAR},
+      person_tatal = #{record.personTatal,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.dd.manager.bean.TDishGroup">
+    update t_dish_group
+    <set>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="groupIntro != null">
+        group_intro = #{groupIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="groupPrice != null">
+        group_price = #{groupPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="groupPicture != null">
+        group_picture = #{groupPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEvaluate != null">
+        group_evaluate = #{groupEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="personTatal != null">
+        person_tatal = #{personTatal,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.dd.manager.bean.TDishGroup">
+    update t_dish_group
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      group_intro = #{groupIntro,jdbcType=VARCHAR},
+      group_price = #{groupPrice,jdbcType=DECIMAL},
+      group_picture = #{groupPicture,jdbcType=VARCHAR},
+      group_evaluate = #{groupEvaluate,jdbcType=VARCHAR},
+      person_tatal = #{personTatal,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+</mapper>

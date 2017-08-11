@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dd.manager.dao.TShopMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.dd.manager.bean.TShop">
+    <id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="shop_level" jdbcType="INTEGER" property="shopLevel" />
+    <result column="shop_status" jdbcType="INTEGER" property="shopStatus" />
+    <result column="sale_status" jdbcType="INTEGER" property="saleStatus" />
+    <result column="shop_add" jdbcType="VARCHAR" property="shopAdd" />
+    <result column="shop_account" jdbcType="VARCHAR" property="shopAccount" />
+    <result column="account_password" jdbcType="VARCHAR" property="accountPassword" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shop_id, shop_name, shop_level, shop_status, sale_status, shop_add, shop_account, 
+    account_password
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.dd.manager.bean.TShopExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.dd.manager.bean.TShopExample">
+    delete from t_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.dd.manager.bean.TShop">
+    insert into t_shop (shop_id, shop_name, shop_level, 
+      shop_status, sale_status, shop_add, 
+      shop_account, account_password)
+    values (#{shopId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{shopLevel,jdbcType=INTEGER}, 
+      #{shopStatus,jdbcType=INTEGER}, #{saleStatus,jdbcType=INTEGER}, #{shopAdd,jdbcType=VARCHAR}, 
+      #{shopAccount,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.atguigu.dd.manager.bean.TShop">
+    insert into t_shop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="shopName != null">
+        shop_name,
+      </if>
+      <if test="shopLevel != null">
+        shop_level,
+      </if>
+      <if test="shopStatus != null">
+        shop_status,
+      </if>
+      <if test="saleStatus != null">
+        sale_status,
+      </if>
+      <if test="shopAdd != null">
+        shop_add,
+      </if>
+      <if test="shopAccount != null">
+        shop_account,
+      </if>
+      <if test="accountPassword != null">
+        account_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevel != null">
+        #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="shopStatus != null">
+        #{shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="saleStatus != null">
+        #{saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shopAdd != null">
+        #{shopAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAccount != null">
+        #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        #{accountPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.atguigu.dd.manager.bean.TShopExample" resultType="java.lang.Long">
+    select count(*) from t_shop
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_shop
+    <set>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopName != null">
+        shop_name = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopLevel != null">
+        shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopStatus != null">
+        shop_status = #{record.shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleStatus != null">
+        sale_status = #{record.saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopAdd != null">
+        shop_add = #{record.shopAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAccount != null">
+        shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountPassword != null">
+        account_password = #{record.accountPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_shop
+    set shop_id = #{record.shopId,jdbcType=INTEGER},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_level = #{record.shopLevel,jdbcType=INTEGER},
+      shop_status = #{record.shopStatus,jdbcType=INTEGER},
+      sale_status = #{record.saleStatus,jdbcType=INTEGER},
+      shop_add = #{record.shopAdd,jdbcType=VARCHAR},
+      shop_account = #{record.shopAccount,jdbcType=VARCHAR},
+      account_password = #{record.accountPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.dd.manager.bean.TShop">
+    update t_shop
+    <set>
+      <if test="shopName != null">
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopLevel != null">
+        shop_level = #{shopLevel,jdbcType=INTEGER},
+      </if>
+      <if test="shopStatus != null">
+        shop_status = #{shopStatus,jdbcType=INTEGER},
+      </if>
+      <if test="saleStatus != null">
+        sale_status = #{saleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shopAdd != null">
+        shop_add = #{shopAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAccount != null">
+        shop_account = #{shopAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPassword != null">
+        account_password = #{accountPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.dd.manager.bean.TShop">
+    update t_shop
+    set shop_name = #{shopName,jdbcType=VARCHAR},
+      shop_level = #{shopLevel,jdbcType=INTEGER},
+      shop_status = #{shopStatus,jdbcType=INTEGER},
+      sale_status = #{saleStatus,jdbcType=INTEGER},
+      shop_add = #{shopAdd,jdbcType=VARCHAR},
+      shop_account = #{shopAccount,jdbcType=VARCHAR},
+      account_password = #{accountPassword,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+</mapper>

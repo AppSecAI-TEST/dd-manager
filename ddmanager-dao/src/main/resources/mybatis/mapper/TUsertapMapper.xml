@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.dd.manager.dao.TUsertapMapper">
+  <resultMap id="BaseResultMap" type="com.atguigu.dd.manager.bean.TUsertap">
+    <id column="tap_id" jdbcType="INTEGER" property="tapId" />
+    <result column="user_tap" jdbcType="VARCHAR" property="userTap" />
+    <result column="tap_type" jdbcType="INTEGER" property="tapType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    tap_id, user_tap, tap_type
+  </sql>
+  <select id="selectByExample" parameterType="com.atguigu.dd.manager.bean.TUsertapExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_usertap
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_usertap
+    where tap_id = #{tapId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_usertap
+    where tap_id = #{tapId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.dd.manager.bean.TUsertapExample">
+    delete from t_usertap
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.dd.manager.bean.TUsertap">
+    insert into t_usertap (tap_id, user_tap, tap_type
+      )
+    values (#{tapId,jdbcType=INTEGER}, #{userTap,jdbcType=VARCHAR}, #{tapType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.atguigu.dd.manager.bean.TUsertap">
+    insert into t_usertap
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tapId != null">
+        tap_id,
+      </if>
+      <if test="userTap != null">
+        user_tap,
+      </if>
+      <if test="tapType != null">
+        tap_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tapId != null">
+        #{tapId,jdbcType=INTEGER},
+      </if>
+      <if test="userTap != null">
+        #{userTap,jdbcType=VARCHAR},
+      </if>
+      <if test="tapType != null">
+        #{tapType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.atguigu.dd.manager.bean.TUsertapExample" resultType="java.lang.Long">
+    select count(*) from t_usertap
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_usertap
+    <set>
+      <if test="record.tapId != null">
+        tap_id = #{record.tapId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userTap != null">
+        user_tap = #{record.userTap,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tapType != null">
+        tap_type = #{record.tapType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_usertap
+    set tap_id = #{record.tapId,jdbcType=INTEGER},
+      user_tap = #{record.userTap,jdbcType=VARCHAR},
+      tap_type = #{record.tapType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.dd.manager.bean.TUsertap">
+    update t_usertap
+    <set>
+      <if test="userTap != null">
+        user_tap = #{userTap,jdbcType=VARCHAR},
+      </if>
+      <if test="tapType != null">
+        tap_type = #{tapType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where tap_id = #{tapId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.dd.manager.bean.TUsertap">
+    update t_usertap
+    set user_tap = #{userTap,jdbcType=VARCHAR},
+      tap_type = #{tapType,jdbcType=INTEGER}
+    where tap_id = #{tapId,jdbcType=INTEGER}
+  </update>
+</mapper>

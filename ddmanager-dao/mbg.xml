@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 去除注解 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/yanyu" userId="root"
+			password="123456">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- pojo生成的地方 -->
+		<javaModelGenerator targetPackage="com.atguigu.dd.manager.bean"
+			targetProject="..\ddmanager-pojo\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- sql映射文件生成的地方 -->
+		<sqlMapGenerator targetPackage="mybatis.mapper"
+			targetProject=".\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- dao接口生成的地方 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.atguigu.dd.manager.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 只要是数据库对应的pojo，我们都以T开头 -->
+		<!-- 指定要逆向的每一张表,用户表 -->
+
+		<table tableName="t_ad" domainObjectName="TAvertisement"></table>
+		<table tableName="t_complaint" domainObjectName="TComplaint"></table>
+		<table tableName="t_concern_shop" domainObjectName="TConcernShop"></table>
+		<table tableName="t_consume_message" domainObjectName="TConsumeMessage"></table>
+		<table tableName="t_development" domainObjectName="TDevelopment"></table>
+
+		<table tableName="t_development_comment" domainObjectName="TDevelopmentComment"></table>
+		<table tableName="t_dish_group" domainObjectName="TDishGroup"></table>
+		<table tableName="t_dish_single" domainObjectName="TDishSingle"></table>
+		<table tableName="t_group_status" domainObjectName="TGroupStatus"></table>
+		<table tableName="t_manager" domainObjectName="TManager"></table>
+
+		<table tableName="t_manager_role" domainObjectName="TManagerRole"></table>
+		<table tableName="t_message" domainObjectName="TMessage"></table>
+		<table tableName="t_order" domainObjectName="TOrder"></table>
+		<table tableName="t_order_item" domainObjectName="TOrderItem"></table>
+		<table tableName="t_permission" domainObjectName="TPermission"></table>
+
+		<table tableName="t_question" domainObjectName="TQuestion"></table>
+		<table tableName="t_role" domainObjectName="TRole"></table>
+		<table tableName="t_role_permission" domainObjectName="TRolePermission"></table>
+		<table tableName="t_sensitive" domainObjectName="TSensitive"></table>
+		<table tableName="t_shop" domainObjectName="TShop"></table>
+
+		<table tableName="t_shop_comment" domainObjectName="TShopComment"></table>
+		<table tableName="t_shop_shoptap" domainObjectName="TShopShoptap"></table>
+		<table tableName="t_shopkeeper" domainObjectName="TShopkeeper"></table>
+		<table tableName="t_shoptap" domainObjectName="TShoptap"></table>
+		<table tableName="t_user_question" domainObjectName="TUserQuestion"></table>
+
+		<table tableName="t_user" domainObjectName="TUser"></table>
+
+		<table tableName="t_user_usertap" domainObjectName="TUserUsertap"></table>
+		<table tableName="t_usertap" domainObjectName="TUsertap"></table>
+
+	</context>
+</generatorConfiguration>
